@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:deneme/utils/responsiveness.dart';
+import 'package:deneme/utils/spacing.dart';
 import 'package:flutter/material.dart';
 
 import '../../enums/enums.dart';
@@ -55,10 +56,13 @@ class PopularToday extends StatelessWidget {
             ],
           ),
 
+          VerSpace(20),
+
           // # Events
 
           Expanded(
             child: GridView.count(
+              mainAxisSpacing: 15.0,
               crossAxisCount: width(context: context) == Responsive.large
                   ? 4
                   : width(context: context) == Responsive.medium
@@ -101,29 +105,42 @@ class Event extends StatelessWidget {
   Widget build(BuildContext context) {
     var deviceWidth = MediaQuery.of(context).size.width;
 
-    return SizedBox(
+    return Container(
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(28.0))),
       width: width(context: context) == Responsive.large
           ? deviceWidth / 4
           : width(context: context) == Responsive.medium
               ? deviceWidth / 2
               : deviceWidth,
+      height: 350,
       child: Stack(
         children: [
           // # Image
 
           Stack(
+            fit: StackFit.expand,
             alignment: Alignment.center,
             children: [
-              Image(image: NetworkImage(image), fit: BoxFit.cover),
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(22.0)),
+                child: Image.network(
+                  image,
+                  fit: BoxFit.cover,
+                ),
+              ),
               Container(
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(22.0)),
                   gradient: LinearGradient(
                     colors: [
-                      Colors.white.withOpacity(0.1),
-                      Colors.white.withOpacity(0.2),
-                      Colors.white.withOpacity(0.3),
+                      Colors.transparent,
+                      Colors.white.withOpacity(0.03),
+                      Colors.white.withOpacity(0.06),
+                      Colors.white.withOpacity(0.09),
+                      Colors.white.withOpacity(0.12),
                     ],
-                    stops: [0.8, 0.9, 1.0],
+                    stops: [0.4, 0.7, 0.8, 0.9, 1.0],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -135,18 +152,20 @@ class Event extends StatelessWidget {
           // # Name and Date
 
           Positioned(
-            bottom: 10,
-            left: 10,
+            bottom: 20,
+            left: 20,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   date,
                   textAlign: TextAlign.left,
                   style: const TextStyle(color: Colors.grey, fontSize: 12),
                 ),
+                VerSpace(5),
                 Text(
                   name,
-                  style: const TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 14, 14, 14)),
                 ),
               ],
             ),
