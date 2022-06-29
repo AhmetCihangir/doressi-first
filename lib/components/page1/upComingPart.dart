@@ -34,6 +34,8 @@ class UpComingPart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // # Upcoming Events Title
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -48,6 +50,9 @@ class UpComingPart extends StatelessWidget {
           ],
         ),
         VerSpace(20),
+        
+        // # Upcoming Events Elements 
+        
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(

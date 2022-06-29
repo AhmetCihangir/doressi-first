@@ -12,6 +12,7 @@ void main(){
         backgroundColor: kBgColor,
         body: Page1(),
       ),
+      
     ),
   );
 }
